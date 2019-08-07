@@ -1,6 +1,6 @@
 {
   "name": "ts-integration-zapier",
-  "version": "1.0.1",
+  "version": "1.1.2",
   "description": "Timesheet Integration Zapier",
   "repository": "https://github.com/timesheetIO/ts-integration-zapier.git",
   "homepage": "https://timesheet.io/",
@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "moment": "^2.24.0",
-    "zapier-platform-core": "8.0.1"
+    "zapier-platform-core": "8.2.1"
   },
   "devDependencies": {
     "mocha": "^5.2.0",
