@@ -6,10 +6,7 @@ Timesheet Integration for [Zapier](https://zapier.com). It lets you connect your
 #### Actions
 
 Execute one of the following actions:
-
 * Send Report
-
-
 * Create Team
 * Create Project
 * Create Task
