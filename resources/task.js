@@ -206,8 +206,6 @@ module.exports = {
 
                     let dynamicFields = [];
 
-                    z.console.log(bundle.inputData.billable);
-
                     if (bundle.inputData.billable === 'true') {
                         dynamicFields.push({
                             key: 'billed',

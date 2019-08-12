@@ -13,11 +13,35 @@ const sendReport = (z, bundle) => {
             projectIds: bundle.inputData.projectIds,
             type: bundle.inputData.type,
             filter: bundle.inputData.filter,
-            summarize: bundle.inputData.summarize,
-            start: moment(bundle.inputData.start).parseZone().second(0).millisecond(0).format("YYYY-MM-DD"),
-            end: moment(bundle.inputData.end).parseZone().second(0).millisecond(0).format("YYYY-MM-DD")
+            summarize: bundle.inputData.summarize
         }
     };
+
+    let ranges = [];
+    ranges['0'] = [moment().startOf('day'), moment().endOf('day')];
+    ranges['1'] = [moment().startOf('week'), moment().endOf('week')];
+    ranges['2'] = [moment().subtract(1, 'week').startOf('week'), moment().endOf('week')];
+    ranges['3'] = [moment().startOf('month'), moment().endOf('month')];
+    ranges['4'] = [moment().startOf('year'), moment().endOf('year')];
+    ranges['5'] = [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')];
+    ranges['6'] = [moment().subtract(1, 'week').startOf('week'), moment().subtract(1, 'week').endOf('week')];
+    ranges['7'] = [moment().subtract(2, 'week').startOf('week'), moment().subtract(1, 'week').endOf('week')];
+    ranges['8'] = [moment().subtract(4, 'week').startOf('week'), moment().subtract(1, 'week').endOf('week')];
+    ranges['9'] = [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')];
+    ranges['10'] = [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')];
+
+    if (bundle.inputData.dateRange !== '11') {
+        data.body.start = ranges[bundle.inputData.dateRange][0].format("YYYY-MM-DD");
+        data.body.end = ranges[bundle.inputData.dateRange][1].format("YYYY-MM-DD");
+    } else {
+        if (bundle.inputData.start && bundle.inputData.end) {
+            data.body.start = moment(bundle.inputData.start).parseZone().second(0).millisecond(0).format("YYYY-MM-DD");
+            data.body.end = moment(bundle.inputData.end).parseZone().second(0).millisecond(0).format("YYYY-MM-DD");
+        } else {
+            data.body.start = ranges['0'][0].format("YYYY-MM-DD");
+            data.body.end = ranges['0'][1].format("YYYY-MM-DD");
+        }
+    }
 
     let definedFields = [
         {"id": 2, "name": "Date"},
@@ -109,18 +133,51 @@ module.exports = {
                 list: true
             },
             {
-                key: 'start',
-                label: 'Start Date',
-                helpText: 'Start date of this Report',
-                type: 'datetime',
-                required: true
+                key: 'dateRange',
+                label: 'Date Range',
+                helpText: 'Date range of Report',
+                required: true,
+                type: 'integer',
+                altersDynamicFields: true,
+                choices: [
+                    {value: '0', sample: '0', label: "Today"},
+                    {value: '1', sample: '1', label: "current Week"},
+                    {value: '2', sample: '2', label: "current 2 Weeks"},
+                    {value: '3', sample: '3', label: "current Month"},
+                    {value: '4', sample: '4', label: "current Year"},
+                    {value: '5', sample: '5', label: "Yesterday"},
+                    {value: '6', sample: '6', label: "last Week"},
+                    {value: '7', sample: '7', label: "last 2 Weeks"},
+                    {value: '8', sample: '8', label: "last 4 Weeks"},
+                    {value: '9', sample: '9', label: "last Month"},
+                    {value: '10', sample: '10', label: "last Year"},
+                    {value: '11', sample: '11', label: "Custom Range"}
+                ]
             },
-            {
-                key: 'end',
-                label: 'End Date',
-                helpText: 'End date of this Report',
-                type: 'datetime',
-                required: true
+            function (z, bundle) {
+
+                let dynamicFields = [];
+
+                if (bundle.inputData.dateRange === '11') {
+                    dynamicFields.push(
+                        {
+                            key: 'start',
+                            label: 'Start Date',
+                            helpText: 'Start date of this Report',
+                            type: 'datetime',
+                            required: true
+                        });
+                    dynamicFields.push(
+                        {
+                            key: 'end',
+                            label: 'End Date',
+                            helpText: 'End date of this Report',
+                            type: 'datetime',
+                            required: true
+                        });
+                }
+
+                return dynamicFields;
             },
             {
                 key: 'type',
