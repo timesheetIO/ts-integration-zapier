@@ -4,7 +4,7 @@ const getRate = (z, bundle) => {
         url: `https://api.timesheet.io/v1/rates/${bundle.inputData.id}`,
     });
     return responsePromise
-        .then(response => z.JSON.parse(response.content));
+        .then(response => response.data);
 };
 
 // Get List of Rates
@@ -24,7 +24,7 @@ const listRates = (z, bundle, sort, order) => {
     }
 
     return z.request(data)
-        .then(response => z.JSON.parse(response.content).items);
+        .then(response => response.data.items);
 };
 
 const latestRates = (z, bundle) => {
@@ -47,7 +47,7 @@ const searchRates = (z, bundle) => {
         }
     });
     return responsePromise
-        .then(response => z.JSON.parse(response.content).items);
+        .then(response => response.data.items);
 };
 
 // Create a Rate
@@ -64,7 +64,7 @@ const createRate = (z, bundle) => {
     if (bundle.inputData.teamId) {
         data.body.teamId = bundle.inputData.teamId;
     }
-    return z.request(data).then(response => z.JSON.parse(response.content));
+    return z.request(data).then(response => response.data);
 };
 
 const teamFields = (z, bundle) => {
@@ -74,7 +74,7 @@ const teamFields = (z, bundle) => {
     });
     return responsePromise
         .then(response => {
-            const profile = z.JSON.parse(response.content);
+            const profile = response.data;
             if (profile.activatedTeams) {
                 return [{
                     key: 'teamId',
@@ -101,7 +101,7 @@ const subscribeHook = (z, bundle) => {
     });
 
     return responsePromise
-        .then(response => z.JSON.parse(response.content));
+        .then(response => response.data);
 };
 
 const unsubscribeHook = (z, bundle) => {
@@ -111,7 +111,7 @@ const unsubscribeHook = (z, bundle) => {
     });
 
     return responsePromise
-        .then(response => z.JSON.parse(response.content));
+        .then(response => response.data);
 };
 
 const hookInbound = (z, bundle) => {

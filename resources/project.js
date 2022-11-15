@@ -4,7 +4,7 @@ const getProject = (z, bundle) => {
         url: `https://api.timesheet.io/v1/projects/${bundle.inputData.id}`,
     });
     return responsePromise
-        .then(response => z.JSON.parse(response.content));
+        .then(response => response.data);
 };
 
 // Get List of Projects
@@ -20,7 +20,7 @@ const listProjects = (z, bundle, status, sort, order) => {
         }
     });
     return responsePromise
-        .then(response => z.JSON.parse(response.content).items);
+        .then(response => response.data.items);
 };
 
 const latestProjects = (z, bundle) => {
@@ -43,7 +43,7 @@ const searchProjects = (z, bundle) => {
         }
     });
     return responsePromise
-        .then(response => z.JSON.parse(response.content).items);
+        .then(response => response.data.items);
 };
 
 // Create a Project
@@ -63,7 +63,7 @@ const createProject = (z, bundle) => {
     if (bundle.inputData.teamId) {
         data.body.teamId = bundle.inputData.teamId;
     }
-    return z.request(data).then(response => z.JSON.parse(response.content));
+    return z.request(data).then(response => response.data);
 };
 
 const teamFields = (z, bundle) => {
@@ -73,7 +73,7 @@ const teamFields = (z, bundle) => {
     });
     return responsePromise
         .then(response => {
-            const profile = z.JSON.parse(response.content);
+            const profile = response.data;
             if (profile.activatedTeams) {
                 return [{
                     key: 'teamId',
@@ -100,7 +100,7 @@ const subscribeHook = (z, bundle) => {
     });
 
     return responsePromise
-        .then(response => z.JSON.parse(response.content));
+        .then(response => response.data);
 };
 
 const unsubscribeHook = (z, bundle) => {
@@ -110,7 +110,7 @@ const unsubscribeHook = (z, bundle) => {
     });
 
     return responsePromise
-        .then(response => z.JSON.parse(response.content));
+        .then(response => response.data);
 };
 
 const hookInbound = (z, bundle) => {

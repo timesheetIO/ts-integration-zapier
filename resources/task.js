@@ -6,7 +6,7 @@ const getTask = (z, bundle) => {
         url: `https://api.timesheet.io/v1/tasks/${bundle.inputData.id}`,
     });
     return responsePromise
-        .then(response => z.JSON.parse(response.content));
+        .then(response => response.data);
 };
 
 // Get List of Tasks
@@ -21,7 +21,7 @@ const listTasks = (z, bundle, sort, order) => {
         }
     });
     return responsePromise
-        .then(response => z.JSON.parse(response.content).items);
+        .then(response => response.data.items);
 };
 
 const latestTasks = (z, bundle) => {
@@ -44,7 +44,7 @@ const searchTasks = (z, bundle) => {
         }
     });
     return responsePromise
-        .then(response => z.JSON.parse(response.content).items);
+        .then(response => response.data.items);
 };
 
 // Create a Task
@@ -67,7 +67,7 @@ const createTask = (z, bundle) => {
     };
 
     return z.request(data)
-        .then(response => z.JSON.parse(response.content));
+        .then(response => response.data);
 };
 
 const subscribeHook = (z, bundle) => {
@@ -81,7 +81,7 @@ const subscribeHook = (z, bundle) => {
     });
 
     return responsePromise
-        .then(response => z.JSON.parse(response.content));
+        .then(response => response.data);
 };
 
 const unsubscribeHook = (z, bundle) => {
@@ -91,7 +91,7 @@ const unsubscribeHook = (z, bundle) => {
     });
 
     return responsePromise
-        .then(response => z.JSON.parse(response.content));
+        .then(response => response.data);
 };
 
 const hookInbound = (z, bundle) => {

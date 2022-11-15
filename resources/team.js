@@ -4,7 +4,7 @@ const getTeam = (z, bundle) => {
         url: `https://api.timesheet.io/v1/teams/${bundle.inputData.id}`,
     });
     return responsePromise
-        .then(response => z.JSON.parse(response.content));
+        .then(response => response.data);
 };
 
 // Get List of Teams
@@ -19,7 +19,7 @@ const listTeams = (z, bundle, sort, order) => {
         }
     });
     return responsePromise
-        .then(response => z.JSON.parse(response.content).items);
+        .then(response => response.data.items);
 };
 
 const latestTeams = (z, bundle) => {
@@ -42,7 +42,7 @@ const searchTeams = (z, bundle) => {
         }
     });
     return responsePromise
-        .then(response => z.JSON.parse(response.content).items);
+        .then(response => response.data.items);
 };
 
 // Create a Team
@@ -56,7 +56,7 @@ const createTeam = (z, bundle) => {
         }
     });
     return responsePromise
-        .then(response => z.JSON.parse(response.content));
+        .then(response => response.data);
 };
 
 const subscribeHook = (z, bundle) => {
@@ -70,7 +70,7 @@ const subscribeHook = (z, bundle) => {
     });
 
     return responsePromise
-        .then(response => z.JSON.parse(response.content));
+        .then(response => response.data);
 };
 
 const unsubscribeHook = (z, bundle) => {
@@ -80,7 +80,7 @@ const unsubscribeHook = (z, bundle) => {
     });
 
     return responsePromise
-        .then(response => z.JSON.parse(response.content));
+        .then(response => response.data);
 };
 
 const hookInbound = (z, bundle) => {

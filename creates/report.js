@@ -96,7 +96,7 @@ const sendReport = (z, bundle) => {
     data.body.exportedFields = exportedFields;
 
     return z.request(data)
-        .then(response => z.JSON.parse(response.content));
+        .then(response => response.data);
 };
 
 module.exports = {
