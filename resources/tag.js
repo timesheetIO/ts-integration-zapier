@@ -188,7 +188,7 @@ module.exports = {
     },
 
     sample: {
-        id: 'sadfsdfdsfus676786sdf8sd7',
+        id: '6p57207o8d4348de85211a83b6f6c4eb',
         title: 'Test Tag',
         color: -12323
     },
@@ -196,6 +196,6 @@ module.exports = {
     outputFields: [
         {key: 'id', label: 'ID'},
         {key: 'name', label: 'Name'},
-        {key: 'color', label: 'Color'}
+        {key: 'color', label: 'Color', type: 'integer'}
     ]
 };

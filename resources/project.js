@@ -207,8 +207,8 @@ module.exports = {
     },
 
     sample: {
-        id: '34434443dssdA3DGAsjf4r90dvs0dv',
-        title: 'Test',
+        id: '6e57207d8d4348de85210a83b6f6c4ab',
+        title: 'Test Project',
         employer: 'Acme Inc.',
         description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.',
         office: '711-2880 Nulla St. Mankato Mississippi 96522',
@@ -222,7 +222,7 @@ module.exports = {
         {key: 'employer', label: 'Client'},
         {key: 'description', label: 'Description'},
         {key: 'office', label: 'Office'},
-        {key: 'salary', label: 'Salary/h'},
-        {key: 'color', label: 'Color'}
+        {key: 'salary', label: 'Salary/h', type: 'number'},
+        {key: 'color', label: 'Color', type: 'integer'}
     ]
 };

@@ -202,7 +202,7 @@ module.exports = {
     },
 
     sample: {
-        id: 'sdfewfe3434423342334434',
+        id: '6t57207o8d4848de85210a83b6f6c4bb',
         title: 'Test Rate',
         factor: 1.0,
         extra: 100.0
@@ -211,7 +211,7 @@ module.exports = {
     outputFields: [
         {key: 'id', label: 'ID'},
         {key: 'title', label: 'Title'},
-        {key: 'factor', label: 'Factor'},
-        {key: 'extra', label: 'Extra/h'}
+        {key: 'factor', label: 'Factor', type: 'number'},
+        {key: 'extra', label: 'Extra/h', type: 'number'}
     ]
 };

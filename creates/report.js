@@ -127,7 +127,6 @@ module.exports = {
                 key: 'projectIds',
                 label: 'Projects',
                 helpText: 'Includes Tasks of these Projects',
-                type: 'string',
                 required: false,
                 dynamic: 'project.id.title',
                 list: true
@@ -280,9 +279,9 @@ module.exports = {
         sample: {
             email: 'support@timesheet.io',
             report: 0,
-            projectIds: ['32453ffdfrefsfererf'],
-            start: '2019-08-01',
-            end: '2019-08-31',
+            projectIds: ['6e57207d8d4348de85210a83b6f6c4ab'],
+            start: '2022-11-01',
+            end: '2022-11-30',
             type: 'all',
             filter: 'all',
             exportedFields: ['2', '3', '4', '5', '6'],
@@ -293,14 +292,14 @@ module.exports = {
 
         outputFields: [
             {key: 'email', label: 'Email'},
-            {key: 'report', label: 'Report'},
-            {key: 'projectIds', label: 'Project Ids'},
+            {key: 'report', label: 'Report', type: 'integer'},
+            {key: 'projectIds', label: 'Project Ids', list: true},
             {key: 'start', label: 'Start Date'},
             {key: 'end', label: 'End Date'},
             {key: 'type', label: 'Type'},
             {key: 'filter', label: 'Filter'},
-            {key: 'exportedFields', label: 'Exported Fields'},
-            {key: 'summarize', label: 'Summarize'},
+            {key: 'exportedFields', label: 'Exported Fields', list: true},
+            {key: 'summarize', label: 'Summarize', type: 'boolean'},
             {key: 'format', label: 'Format'},
             {key: 'filename', label: 'Filename'}
         ]

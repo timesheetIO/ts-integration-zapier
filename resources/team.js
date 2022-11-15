@@ -164,7 +164,7 @@ module.exports = {
     },
 
     sample: {
-        id: 'eedssaf44234144c3r324234',
+        id: '2i57207d2d4348de85210a13b6f6g4ab',
         name: 'Test Team',
         description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.'
     },

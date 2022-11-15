@@ -254,10 +254,10 @@ module.exports = {
     },
 
     sample: {
-        id: 'sdfdsff3432r345234543523',
-        projectId: '32453ffdfrefsfererf',
-        startDateTime: '2019-08-31T16:00:00+00:00',
-        endDateTime: '2019-08-31T17:00:00+00:00',
+        id: '6w57407o8d4348dg85111a83b6f6c4eb',
+        projectId: '6e57207d8d4348de85210a83b6f6c4ab',
+        startDateTime: '2022-11-14T16:00:00+00:00',
+        endDateTime: '2022-11-14T17:00:00+00:00',
         description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.',
         location: '711-2880 Nulla St. Mankato Mississippi 96522'
     },
