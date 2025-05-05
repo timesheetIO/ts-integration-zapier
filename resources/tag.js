@@ -100,10 +100,21 @@ const subscribeHook = (z, bundle) => {
     });
 
     return responsePromise
-        .then(response => response.data);
+        .then(response => {
+            if (response.status !== 200 && response.status !== 201) {
+                throw new z.errors.Error(`Webhook registration failed: ${response.content}`);
+            }
+            return response.data;
+        });
 };
 
 const unsubscribeHook = (z, bundle) => {
+    // Skip if we don't have an ID
+    if (!bundle.subscribeData || !bundle.subscribeData.id) {
+        z.console.log('No webhook ID found, skipping webhook deletion');
+        return Promise.resolve({});
+    }
+    
     const responsePromise = z.request({
         url: `https://api.timesheet.io/v1/webhooks/${bundle.subscribeData.id}`,
         method: 'DELETE'
@@ -114,6 +125,10 @@ const unsubscribeHook = (z, bundle) => {
 };
 
 const hookInbound = (z, bundle) => {
+    // Validate webhook data
+    if (!bundle.cleanedRequest || !bundle.cleanedRequest.item) {
+        throw new z.errors.Error('Webhook data is invalid or missing');
+    }
     return [bundle.cleanedRequest.item];
 };
 

@@ -81,10 +81,21 @@ const subscribeHook = (z, bundle) => {
     });
 
     return responsePromise
-        .then(response => response.data);
+        .then(response => {
+            if (response.status !== 200 && response.status !== 201) {
+                throw new z.errors.Error(`Webhook registration failed: ${response.content}`);
+            }
+            return response.data;
+        });
 };
 
 const unsubscribeHook = (z, bundle) => {
+    // Skip if we don't have an ID
+    if (!bundle.subscribeData || !bundle.subscribeData.id) {
+        z.console.log('No webhook ID found, skipping webhook deletion');
+        return Promise.resolve({});
+    }
+    
     const responsePromise = z.request({
         url: `https://api.timesheet.io/v1/webhooks/${bundle.subscribeData.id}`,
         method: 'DELETE'
@@ -95,7 +106,21 @@ const unsubscribeHook = (z, bundle) => {
 };
 
 const hookInbound = (z, bundle) => {
-    return [bundle.cleanedRequest.item];
+    // Validate webhook data
+    if (!bundle.cleanedRequest || !bundle.cleanedRequest.item) {
+        throw new z.errors.Error('Webhook data is invalid or missing');
+    }
+    
+    // Ensure dates are in ISO format if they exist
+    const item = bundle.cleanedRequest.item;
+    if (item && item.startDateTime) {
+        item.startDateTime = moment(item.startDateTime).format();
+    }
+    if (item && item.endDateTime) {
+        item.endDateTime = moment(item.endDateTime).format();
+    }
+    
+    return [item];
 };
 
 module.exports = {

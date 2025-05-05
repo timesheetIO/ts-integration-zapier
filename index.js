@@ -1,6 +1,4 @@
 process.env.BASE_URL = process.env.BASE_URL || 'https://auth-json-server.zapier.ninja';
-process.env.CLIENT_ID = process.env.CLIENT_ID || '1234';
-process.env.CLIENT_SECRET = process.env.CLIENT_SECRET || 'asdf';
 
 const authentication = require('./authentication');
 

@@ -35,8 +35,8 @@ const sendReport = (z, bundle) => {
         data.body.end = ranges[bundle.inputData.dateRange][1].format("YYYY-MM-DD");
     } else {
         if (bundle.inputData.start && bundle.inputData.end) {
-            data.body.start = moment(bundle.inputData.start).parseZone().second(0).millisecond(0).format("YYYY-MM-DD");
-            data.body.end = moment(bundle.inputData.end).parseZone().second(0).millisecond(0).format("YYYY-MM-DD");
+            data.body.start = moment(bundle.inputData.start).parseZone().startOf('day').format("YYYY-MM-DD");
+            data.body.end = moment(bundle.inputData.end).parseZone().endOf('day').format("YYYY-MM-DD");
         } else {
             data.body.start = ranges['0'][0].format("YYYY-MM-DD");
             data.body.end = ranges['0'][1].format("YYYY-MM-DD");

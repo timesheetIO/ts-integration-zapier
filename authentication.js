@@ -17,13 +17,12 @@ const getAccessToken = (z, bundle) => {
 
     return promise.then((response) => {
         if (response.status !== 200) {
-            throw new Error('Unable to fetch access token: ' + response.content);
+            throw new z.errors.Error('Unable to fetch access token: ' + response.content);
         }
 
-        const result = JSON.parse(response.content);
         return {
-            access_token: result.access_token,
-            refresh_token: result.refresh_token
+            access_token: response.data.access_token,
+            refresh_token: response.data.refresh_token
         };
     });
 };
@@ -35,23 +34,22 @@ const refreshAccessToken = (z, bundle) => {
         headers: {
             'content-type': 'application/x-www-form-urlencoded',
             accept: 'application/json'
-
         },
         body: {
+            client_id: process.env.CLIENT_ID,
+            client_secret: process.env.CLIENT_SECRET,
             grant_type: 'refresh_token',
             refresh_token: bundle.authData.refresh_token
         }
     });
 
-
     return promise.then((response) => {
         if (response.status !== 200) {
-            throw new Error('Unable to fetch access token: ' + response.content);
+            throw new z.errors.RefreshAuthError('Unable to refresh access token: ' + response.content);
         }
 
-        const result = JSON.parse(response.content);
         return {
-            access_token: result.access_token
+            access_token: response.data.access_token
         };
     });
 };
@@ -64,7 +62,7 @@ const testAuth = (z, bundle) => {
 
     return promise.then((response) => {
         if (response.status === 401) {
-            throw new Error('The access token you supplied is not valid');
+            throw new z.errors.Error('The access token you supplied is not valid');
         }
         return response.data;
     });
