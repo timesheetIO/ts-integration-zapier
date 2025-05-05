@@ -147,8 +147,7 @@ module.exports = {
     search: {
         display: {
             label: 'Find Team',
-            description: 'Finds a Team by searching.',
-            important: true
+            description: 'Finds a Team by searching.'
         },
         operation: {
             inputFields: [

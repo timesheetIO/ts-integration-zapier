@@ -164,7 +164,6 @@ module.exports = {
         display: {
             label: 'New Project',
             description: 'Triggers when a new Project is added.',
-            important: true
         },
         operation: {
             type: 'hook',
@@ -178,8 +177,7 @@ module.exports = {
     search: {
         display: {
             label: 'Find Project',
-            description: 'Finds a Project by searching.',
-            important: true
+            description: 'Finds a Project by searching.'
         },
         operation: {
             inputFields: [
@@ -193,7 +191,6 @@ module.exports = {
         display: {
             label: 'Create Project',
             description: 'Creates a new Project.',
-            important: true
         },
         operation: {
             inputFields: [

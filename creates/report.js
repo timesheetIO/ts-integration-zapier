@@ -105,8 +105,7 @@ module.exports = {
 
     display: {
         label: 'Send Report',
-        description: 'Sends a new Report.',
-        important: true
+        description: 'Sends a new Report.'
     },
 
     operation: {

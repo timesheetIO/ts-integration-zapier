@@ -155,7 +155,6 @@ module.exports = {
         display: {
             label: 'New Task',
             description: 'Triggers when a new Task is added.',
-            important: true
         },
         operation: {
             type: 'hook',
@@ -182,8 +181,7 @@ module.exports = {
     create: {
         display: {
             label: 'Create Task',
-            description: 'Creates a new Task.',
-            important: true
+            description: 'Creates a new Task.'
         },
         operation: {
             inputFields: [
