@@ -1,3 +1,17 @@
+/**
+ * @fileoverview OAuth2 authentication configuration for Timesheet.io Zapier integration
+ * @module authentication
+ */
+
+/**
+ * Exchanges an authorization code for access and refresh tokens
+ * @param {Object} z - The Zapier object with utilities
+ * @param {Object} bundle - The input bundle containing request data
+ * @param {string} bundle.inputData.code - OAuth2 authorization code from redirect
+ * @param {string} bundle.inputData.redirect_uri - The redirect URI used in authorization
+ * @returns {Promise<Object>} Object containing access_token and refresh_token
+ * @throws {Error} When token exchange fails
+ */
 const getAccessToken = (z, bundle) => {
     const promise = z.request({
         method: 'POST',
@@ -27,6 +41,14 @@ const getAccessToken = (z, bundle) => {
     });
 };
 
+/**
+ * Refreshes an expired access token using the refresh token
+ * @param {Object} z - The Zapier object with utilities
+ * @param {Object} bundle - The input bundle containing auth data
+ * @param {string} bundle.authData.refresh_token - The refresh token to use
+ * @returns {Promise<Object>} Object containing new access_token
+ * @throws {RefreshAuthError} When refresh fails (triggers re-authentication)
+ */
 const refreshAccessToken = (z, bundle) => {
     const promise = z.request({
         method: 'POST',
@@ -54,6 +76,13 @@ const refreshAccessToken = (z, bundle) => {
     });
 };
 
+/**
+ * Tests the authentication by fetching the user's profile
+ * @param {Object} z - The Zapier object with utilities
+ * @param {Object} bundle - The input bundle containing auth data
+ * @returns {Promise<Object>} User profile data including email
+ * @throws {Error} When authentication is invalid
+ */
 const testAuth = (z, bundle) => {
     const promise = z.request({
         method: 'GET',
@@ -68,6 +97,18 @@ const testAuth = (z, bundle) => {
     });
 };
 
+/**
+ * OAuth2 authentication configuration
+ * @type {Object}
+ * @property {string} type - Authentication type (oauth2)
+ * @property {Object} oauth2Config - OAuth2 specific configuration
+ * @property {Object} oauth2Config.authorizeUrl - Authorization endpoint configuration
+ * @property {Function} oauth2Config.getAccessToken - Token exchange function
+ * @property {Function} oauth2Config.refreshAccessToken - Token refresh function
+ * @property {boolean} oauth2Config.autoRefresh - Enable automatic token refresh
+ * @property {Function} test - Authentication test function
+ * @property {string} connectionLabel - Template for connection display name
+ */
 module.exports = {
 
     type: 'oauth2',
