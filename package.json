@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "moment": "^2.30.1",
-    "zapier-platform-cli": "^16.5.0",
+    "zapier-platform-cli": "^18.0.1",
     "zapier-platform-core": "16.5.0"
   },
   "devDependencies": {
